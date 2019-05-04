@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://manu4363:manu43@skillconnectorcluster-slslp.mongodb.net/test?retryWrites=true",
+    "jwtSecret": "mysecrettoken"
+}
