@@ -1,4 +1,6 @@
 {
     "mongoURI": "mongodb+srv://manu4363:manu43@skillconnectorcluster-slslp.mongodb.net/test?retryWrites=true",
-    "jwtSecret": "mysecrettoken"
+    "jwtSecret": "mysecrettoken",
+    "githubClientId": "f9587e7109b41571ed4c",
+    "githubSecret": "c99d87aa1caa7a619cb26c95c6e20012530899b8"
 }

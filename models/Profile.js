@@ -83,6 +83,33 @@ const ProfileSchema = new mongoose.Schema({
             }
         }
     ],
+    project: [
+        {
+            title: {
+                type: String,
+                required: true
+            },
+            description: {
+                type: String,
+                required: true
+            },
+            kind: {
+                type: String,
+                enum: ['Professional', 'Personal' ],
+                default: 'Professional'
+            },
+            image: {
+                type: String
+            },
+            from: {
+                type: Date,
+                required: true
+            },
+            to: {
+                type: Date
+            }
+        }
+    ],
     social: {
         youtube: {
             type: String
