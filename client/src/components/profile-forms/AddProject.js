@@ -14,7 +14,7 @@ const AddProject = ({ addProject, history }) => {
     to: ''
   });
 
-  const [toDateDisabled, toggleDisabled] = useState(false);
+  const [toDateDisabled] = useState(false);
 
   const { title, description, kind, image, from, to } = formData;
 
