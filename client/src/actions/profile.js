@@ -239,6 +239,56 @@ export const addProject = (formData, history) => async dispatch => {
   }
 }
 
+//Update file
+export const uploadFile = (formData) => async dispatch => {
+  try {
+    const res = await axios.post('/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data
+    });
+
+    dispatch(setAlert('File uploaded', 'success'));
+    //setUploadedFile({ fileName, filePath });
+  } catch (err) {
+    if (err.response.status === 500){
+      console.log("There's a problem with the server");
+    } else {
+      console.log(err.response.data.msg);
+    }
+  }
+}
+
+//Edit experience
+export const editExperience = (id, formData, history) => async dispatch => {
+  try {
+
+    const res = await axios.put(`api/profile/experience/${id}`, formData, history);
+
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Experience edited', 'success'));
+    history.push('/dashboard');
+
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: {
+        msg: err.response.statusText,
+        status: err.response.status
+      }
+    });
+  }
+}
+
 //Delete experience
 export const deleteExperience = id => async dispatch => {
   try {

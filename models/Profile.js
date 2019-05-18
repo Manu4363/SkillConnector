@@ -99,8 +99,7 @@ const ProfileSchema = new mongoose.Schema({
             },
             kind: {
                 type: String,
-                enum: ['Professional', 'Personal' ],
-                default: 'Professional'
+                required: true
             },
             image: {
                 type: String

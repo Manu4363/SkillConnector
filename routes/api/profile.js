@@ -191,6 +191,41 @@ router.put('/experience', [auth,
 
 });
 
+// @route   PUT api/profile/experience
+// @desc    Update profile experience
+// @access  Private
+router.put('/experience/:exp_id', auth, async (req, res) => {
+
+    const { company, title, location, from, to, current, description } = req.body;
+
+    const newExp = {
+        company,
+        title,
+        location,
+        from,
+        to,
+        current,
+        description
+      };
+      try {
+        const profile = await Profile.findOneAndUpdate({ user: req.user.id });
+     
+        //Get update index
+        const updateIndex = profile.experience
+          .map(item => item.id)
+          .indexOf(req.params.exp_id);
+     
+        profile.experience.splice(updateIndex, 1, newExp);
+     
+        await profile.save();
+     
+        res.json(profile);
+      } catch (error) {
+        //console.error(error.message);
+        res.status(500).send('Server Error');
+      }
+});
+
 // @route   DELETE api/profile/experience/exp_id
 // @desc    Delete experience from profile
 // @access  Private
@@ -283,7 +318,8 @@ router.put('/education', [auth,
 // @access  Private
 router.put('/project', [auth, 
     check('title', 'Title is required').not().isEmpty(),
-    check('description', 'Description is required').not().isEmpty()
+    check('description', 'Description is required').not().isEmpty(),
+    check('kind', 'Category is required').not().isEmpty()
 ], async (req, res) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()){

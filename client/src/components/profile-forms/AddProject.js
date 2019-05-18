@@ -6,36 +6,38 @@ import { addProject } from "../../actions/profile";
 
 const AddProject = ({ addProject, history }) => {
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    kind: '',
-    image: '',
-    from: '',
-    to: ''
+    title: "",
+    description: "",
+    kind: "",
+    image: "",
+    from: "",
+    to: ""
   });
 
   const [toDateDisabled] = useState(false);
 
   const { title, description, kind, image, from, to } = formData;
 
-  const onChange = e => setFormData({ ...formData, [e.target.name] : e.target.value })
+  const onChange = e => {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  }
+ 
   const onSubmit = e => {
     e.preventDefault();
+   
     addProject(formData, history);
-  }
+  };
 
   return (
     <Fragment>
-     <h1 class="large text-primary">
-        Add Your Project
-      </h1>
-      <p class="lead">
-        <i class="fas fa-graduation-cap"></i> Add any professional project
+      <h1 className="large text-primary">Add Your Project</h1>
+      <p className="lead">
+        <i className="fas fa-graduation-cap" /> Add any professional project
       </p>
       <small>* = required field</small>
-      <form class="form" onSubmit={e => onSubmit(e)}>
-        <div class="form-group">
+      <form className="form" onSubmit={e => onSubmit(e)}>
+        <div className="form-group">
           <input
             type="text"
             placeholder="* Title"
@@ -44,7 +46,7 @@ const AddProject = ({ addProject, history }) => {
             onChange={e => onChange(e)}
           />
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <textarea
             name="description"
             cols="30"
@@ -52,30 +54,38 @@ const AddProject = ({ addProject, history }) => {
             placeholder="* Project Description"
             value={description}
             onChange={e => onChange(e)}
-          ></textarea>
+          />
         </div>
-        <div class="form-group">
-        <select name="status" value={kind} onChange={e => onChange(e)}>
+        <div className="form-group">
+          <select name="kind" value={kind} onChange={e => onChange(e)}>
+            <option value="0">* Select Category Project</option>
             <option value="Professional">Professional</option>
             <option value="Personal">Personal</option>
-        </select>
+          </select>
         </div>
-        <div class="form-group">
-          <input type="file" placeholder="image" name="image"  value={image}
-            onChange={e => onChange(e)} />
-        </div>
-        <div class="form-group">
+        <div className="form-group">
           <h4>From Date</h4>
-          <input type="date" name="from"  value={from}
-            onChange={e => onChange(e)} />
+          <input
+            type="date"
+            name="from"
+            value={from}
+            onChange={e => onChange(e)}
+          />
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <h4>To Date</h4>
-          <input type="date" name="to" value={to} onChange={e => onChange(e)} 
-          disabled={toDateDisabled ? 'disabled' : ''} />
+          <input
+            type="date"
+            name="to"
+            value={to}
+            onChange={e => onChange(e)}
+            disabled={toDateDisabled ? "disabled" : ""}
+          />
         </div>
-        <input type="submit" class="btn btn-primary my-1" value="Submit" />
-        <Link class="btn btn-light my-1" to="/dashboard">Go Back</Link>
+        <input type="submit" className="btn btn-primary my-1" value="Submit" />
+        <Link className="btn btn-light my-1" to="/dashboard">
+          Go Back
+        </Link>
       </form>
     </Fragment>
   );
